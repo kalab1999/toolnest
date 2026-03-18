@@ -33,11 +33,11 @@ export default function PDFtoJPG() {
 
     try {
       // ✅ Correct import
-      const pdfjs = await import("pdfjs-dist/build/pdf");
+      const pdfjs = await import("pdfjs-dist");
 
       // ✅ Stable worker (VERY IMPORTANT)
       pdfjs.GlobalWorkerOptions.workerSrc =
-        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs";
 
       const arrayBuffer = await file.arrayBuffer();
       const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise;
@@ -62,6 +62,7 @@ export default function PDFtoJPG() {
         await page.render({
           canvasContext: context,
           viewport,
+          canvas,
         }).promise;
 
         const dataUrl = canvas.toDataURL("image/jpeg", 0.9);

@@ -49,7 +49,7 @@ export default function CompressPDF() {
         objectsPerTick: 20,
       });
 
-      const blob = new Blob([compressedBytes], { type: "application/pdf" });
+      const blob = new Blob([compressedBytes as any], { type: "application/pdf" });
       setResult({ blob, name: `compressed_${file.name}` });
     } catch (err) {
       console.error(err);

@@ -57,7 +57,7 @@ export default function JPGtoPDF() {
       }
 
       const pdfBytes = await pdfDoc.save();
-      const blob = new Blob([pdfBytes], { type: "application/pdf" });
+      const blob = new Blob([pdfBytes as any], { type: "application/pdf" });
       setResult({ blob, name: "converted.pdf" });
     } catch (err) {
       console.error(err);
