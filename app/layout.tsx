@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: "ToolNest - Free Online Tools for Images, Converters & Utilities",
   description: "ToolNest provides fast, simple, and powerful tools to help you work with images, text, and conversions instantly.",
   verification: {
-    google: "Rbw65C7ATHWNtgSuChVcDEGQx4h1LZtEb"
+    google: "Rbw65C7ATHWNtgSuChVcDEGQx4h1LZtEb95sgtTRZr8"
   }
 };
 
