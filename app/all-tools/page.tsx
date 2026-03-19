@@ -26,11 +26,11 @@ export default function AllTools() {
                 {section.items.length} Tools
               </span>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {section.items.map((tool) => (
-                <Link 
-                  key={tool.name} 
+                <Link
+                  key={tool.name}
                   href={tool.href}
                   className="glass-card p-6 flex items-center gap-6 group relative overflow-hidden"
                 >
@@ -46,9 +46,22 @@ export default function AllTools() {
             </div>
 
             {/* In-Directory Ad Break */}
-            <div className="ad-placeholder h-20 mt-12 bg-white border border-neutral-100 rounded-2xl flex items-center justify-center text-[10px] font-bold text-neutral-400 uppercase tracking-widest opacity-40">
-              Community Sponsorship & Support
+            <div className="my-6 text-center">
+              <ins
+                className="adsbygoogle"
+                style={{ display: "block" }}
+                data-ad-client="ca-pub-2422025830935555" // your AdSense client ID
+                data-ad-slot="YOUR_AD_UNIT_ID"           // your ad unit ID from AdSense
+                data-ad-format="auto"
+                data-full-width-responsive="true"
+              ></ins>
+              <script
+                dangerouslySetInnerHTML={{
+                  __html: `(adsbygoogle = window.adsbygoogle || []).push({});`,
+                }}
+              />
             </div>
+
           </div>
         ))}
       </div>
