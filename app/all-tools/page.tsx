@@ -1,21 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import Script from "next/script"; // <-- import Script for AdSense
 import { toolsData } from "@/app/lib/tools";
 
 export default function AllTools() {
   return (
     <div className="pb-20 bg-neutral-50/30 min-h-screen">
-
-      {/* Load Google AdSense library */}
-      <Script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2422025830935555"
-        crossOrigin="anonymous"
-        strategy="afterInteractive"
-      />
-
       <section className="pt-20 pb-12 px-4 relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-primary/5 blur-3xl -z-10 rounded-full"></div>
         <div className="container mx-auto text-center relative z-10">
@@ -69,18 +59,17 @@ export default function AllTools() {
                 className="adsbygoogle"
                 style={{ display: "block" }}
                 data-ad-client="ca-pub-2422025830935555" // your AdSense client ID
-                data-ad-slot="YOUR_AD_UNIT_ID"           // replace with your Ad Unit ID
+                data-ad-slot="YOUR_AD_UNIT_ID"           // your ad unit ID from AdSense
                 data-ad-format="auto"
                 data-full-width-responsive="true"
               ></ins>
-              <Script
-                id={`ads-init-${idx}`} // unique ID for each section
+              <script
                 dangerouslySetInnerHTML={{
                   __html: `(adsbygoogle = window.adsbygoogle || []).push({});`,
                 }}
-                strategy="afterInteractive"
               />
             </div>
+
           </div>
         ))}
       </div>
