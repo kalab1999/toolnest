@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Search, Menu, X, ArrowRight, ChevronDown } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { Search, Menu, X, ArrowRight, ChevronDown, Command } from "lucide-react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import { toolsData } from "@/app/lib/tools";
 
@@ -13,16 +13,33 @@ export default function Header() {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null);
   const searchContainerRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const [searchResults, setSearchResults] = useState<any[]>([]);
 
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Ctrl+K / Cmd+K to open search
+  useEffect(() => {
+    const handleKeydown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+        setIsSearchFocused(true);
+      }
+      if (e.key === "Escape") {
+        setIsSearchFocused(false);
+        setSearchQuery("");
+        searchInputRef.current?.blur();
+      }
+    };
+    document.addEventListener("keydown", handleKeydown);
+    return () => document.removeEventListener("keydown", handleKeydown);
   }, []);
 
   // Close search dropdown on click outside
@@ -57,7 +74,7 @@ export default function Header() {
           }
         });
       });
-      setSearchResults(results.slice(0, 6));
+      setSearchResults(results.slice(0, 7));
     } else {
       setSearchResults([]);
     }
@@ -85,64 +102,80 @@ export default function Header() {
   };
 
   return (
-    <header 
+    <header
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${
-        isScrolled 
-          ? "py-2 bg-white border-b border-neutral-200 shadow-sm" 
-          : "py-4 bg-white border-b border-transparent"
+        isScrolled
+          ? "py-2 glass-header shadow-sm"
+          : "py-3 bg-white/90 backdrop-blur-sm border-b border-neutral-100"
       }`}
     >
-      <div className="container mx-auto px-4 flex items-center justify-between gap-8">
-        {/* Logo Area */}
-        <Link href="/" className="flex items-center gap-2 shrink-0">
-          <div className="w-9 h-9 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary/20">
+      <div className="container mx-auto px-4 flex items-center justify-between gap-6">
+
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
+          <div className="w-9 h-9 rounded-xl flex items-center justify-center text-white font-black text-base shadow-lg shadow-primary/30 transition-all duration-300 group-hover:scale-110 group-hover:shadow-primary/50"
+               style={{ background: "linear-gradient(135deg, #1d4ed8, #3b82f6)" }}>
             TN
           </div>
-          <span className="text-xl font-bold text-neutral-900 tracking-tight hidden sm:block">
+          <span className="text-xl font-black text-neutral-900 tracking-tight hidden sm:block">
             Tool<span className="text-primary">Nest</span>
           </span>
         </Link>
 
         {/* Search Bar - Desktop */}
-        <div className="hidden lg:flex flex-grow max-w-md relative group" ref={searchContainerRef}>
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400 group-focus-within:text-primary transition-colors" />
-          <input 
-            type="text" 
-            placeholder="Search for tools..." 
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onFocus={() => setIsSearchFocused(true)}
-            className="w-full bg-neutral-100 border border-transparent focus:bg-white focus:border-primary/30 py-2.5 pl-11 pr-4 rounded-xl text-sm outline-none transition-all focus:shadow-sm"
-          />
-          
+        <div className="hidden lg:flex flex-grow max-w-lg relative" ref={searchContainerRef}>
+          <div className={`w-full relative transition-all duration-300 ${isSearchFocused ? 'hero-search' : 'bg-neutral-100 rounded-xl border border-transparent hover:border-neutral-200'}`}>
+            <Search className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${isSearchFocused ? 'text-primary' : 'text-neutral-400'}`} />
+            <input
+              ref={searchInputRef}
+              type="text"
+              placeholder="Search tools…"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onFocus={() => setIsSearchFocused(true)}
+              className="w-full bg-transparent py-2.5 pl-11 pr-24 rounded-xl text-sm outline-none text-neutral-900 placeholder-neutral-400"
+            />
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 hidden sm:flex items-center gap-1 text-[10px] text-neutral-400 font-semibold bg-white border border-neutral-200 rounded-md px-1.5 py-0.5 select-none">
+              <Command className="w-2.5 h-2.5" />K
+            </div>
+          </div>
+
           {/* Desktop Search Results Dropdown */}
           {isSearchFocused && searchQuery.trim() !== "" && (
-            <div className="absolute top-full left-0 w-full mt-2 bg-white rounded-2xl shadow-xl border border-neutral-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-2">
+            <div className="absolute top-full left-0 w-full mt-2 bg-white rounded-2xl shadow-2xl border border-neutral-100/80 overflow-hidden z-50"
+                 style={{ animation: "slide-down 0.18s ease-out" }}>
               {searchResults.length > 0 ? (
-                <div className="py-2 max-h-[400px] overflow-y-auto">
+                <div className="py-2 max-h-[420px] overflow-y-auto">
+                  <div className="px-4 py-2 text-[10px] font-bold text-neutral-400 uppercase tracking-widest border-b border-neutral-50">
+                    {searchResults.length} result{searchResults.length !== 1 ? "s" : ""} found
+                  </div>
                   {searchResults.map(tool => (
-                    <Link 
-                      key={tool.name} 
+                    <Link
+                      key={tool.name}
                       href={tool.href}
-                      onClick={() => {
-                        setSearchQuery("");
-                        setIsSearchFocused(false);
-                      }}
-                      className="flex items-center gap-3 px-4 py-3 hover:bg-neutral-50 transition-colors"
+                      onClick={() => { setSearchQuery(""); setIsSearchFocused(false); }}
+                      className="flex items-center gap-3 px-4 py-3 hover:bg-neutral-50 transition-colors group/result"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                      <div className="w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover/result:bg-primary group-hover/result:text-white transition-all">
                         <tool.icon className="w-4 h-4" />
                       </div>
-                      <div>
-                        <p className="text-sm font-bold text-neutral-900 leading-tight">{tool.name}</p>
-                        <p className="text-[10px] text-neutral-500 line-clamp-1 mt-0.5">{tool.description}</p>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-bold text-neutral-900 group-hover/result:text-primary transition-colors">{tool.name}</p>
+                        <p className="text-[10px] text-neutral-400 line-clamp-1 mt-0.5">{tool.description}</p>
                       </div>
+                      <span className="text-[9px] font-bold uppercase tracking-wider text-neutral-300 bg-neutral-100 px-2 py-1 rounded-md shrink-0">
+                        {tool.category}
+                      </span>
                     </Link>
                   ))}
                 </div>
               ) : (
-                <div className="p-6 text-center text-sm text-neutral-500">
-                  No tools found for "{searchQuery}"
+                <div className="p-8 text-center">
+                  <div className="w-12 h-12 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Search className="w-5 h-5 text-neutral-400" />
+                  </div>
+                  <p className="text-sm font-semibold text-neutral-700">No results for "{searchQuery}"</p>
+                  <p className="text-xs text-neutral-400 mt-1">Try a different keyword</p>
                 </div>
               )}
             </div>
@@ -150,48 +183,45 @@ export default function Header() {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-0.5">
           {navLinks.map((link) => {
             const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
-            
+
             if (link.hasDropdown && link.categoryName) {
               const categoryTools = getToolsForCategory(link.categoryName);
-              
-              // Only render dropdown if there are tools
               if (categoryTools.length === 0) return null;
 
-              // Determine grid columns based on number of tools
               const gridCols = categoryTools.length > 6 ? 'grid-cols-2' : 'grid-cols-1';
-              const dropdownWidth = categoryTools.length > 6 ? 'w-[650px]' : 'w-[320px]';
+              const dropdownWidth = categoryTools.length > 6 ? 'w-[620px]' : 'w-[300px]';
 
               return (
                 <div key={link.name} className="relative group/nav">
                   <button
-                    className={`flex items-center gap-1 text-[13px] font-semibold px-2 xl:px-3 py-2 rounded-lg transition-all ${
-                      isActive 
-                        ? "text-primary bg-primary/5" 
+                    className={`flex items-center gap-1 text-[13px] font-semibold px-3 py-2 rounded-lg transition-all ${
+                      isActive
+                        ? "text-primary bg-primary/8"
                         : "text-neutral-600 hover:text-primary hover:bg-neutral-50"
                     }`}
                   >
                     {link.name}
-                    <ChevronDown className="w-3 h-3 group-hover/nav:rotate-180 transition-transform" />
+                    <ChevronDown className="w-3 h-3 group-hover/nav:rotate-180 transition-transform duration-200" />
                   </button>
-                  
+
                   {/* Mega Menu Dropdown */}
-                  <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover/nav:opacity-100 group-hover/nav:visible transition-all duration-300 ${dropdownWidth} z-50`}>
-                    <div className={`bg-white rounded-2xl shadow-xl border border-neutral-100 p-4 xl:p-6 grid ${gridCols} gap-x-6 gap-y-2`}>
+                  <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 invisible group-hover/nav:opacity-100 group-hover/nav:visible transition-all duration-200 ${dropdownWidth} z-50`}>
+                    <div className={`bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-neutral-100 p-3 grid ${gridCols} gap-1`}>
                       {categoryTools.map(tool => (
                         <Link
                           key={tool.name}
                           href={tool.href}
-                          className="flex items-center gap-3 p-3 rounded-xl hover:bg-neutral-50 transition-colors group/item"
+                          className="flex items-center gap-3 p-3 rounded-xl hover:bg-neutral-50 transition-all group/item"
                         >
-                          <div className="w-8 h-8 xl:w-10 xl:h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover/item:scale-110 transition-transform">
-                            <tool.icon className="w-4 h-4 xl:w-5 xl:h-5" />
+                          <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover/item:bg-primary group-hover/item:text-white group-hover/item:scale-110 transition-all duration-200">
+                            <tool.icon className="w-4 h-4" />
                           </div>
                           <div className="min-w-0">
-                            <p className="text-xs xl:text-sm font-bold text-neutral-900 group-hover/item:text-primary transition-colors truncate">{tool.name}</p>
-                            <p className="text-[9px] xl:text-[10px] text-neutral-500 line-clamp-1">{tool.description}</p>
+                            <p className="text-sm font-bold text-neutral-900 group-hover/item:text-primary transition-colors truncate">{tool.name}</p>
+                            <p className="text-[10px] text-neutral-400 line-clamp-1 mt-0.5">{tool.description}</p>
                           </div>
                         </Link>
                       ))}
@@ -205,9 +235,9 @@ export default function Header() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`text-[13px] font-semibold px-2 xl:px-3 py-2 rounded-lg transition-all ${
-                  isActive 
-                    ? "text-primary bg-primary/5" 
+                className={`text-[13px] font-semibold px-3 py-2 rounded-lg transition-all ${
+                  isActive
+                    ? "text-primary bg-primary/8"
                     : "text-neutral-600 hover:text-primary hover:bg-neutral-50"
                 }`}
               >
@@ -217,106 +247,100 @@ export default function Header() {
           })}
         </nav>
 
-        {/* Mobile Menu Toggle */}
-        <div className="flex items-center gap-2">
-          {/* Mobile Search Icon */}
-          <button 
-             className="lg:hidden p-2 text-neutral-500 hover:text-primary"
-             onClick={() => setIsMenuOpen(true)}
+        {/* Mobile Controls */}
+        <div className="flex items-center gap-1 lg:hidden">
+          <button
+            className="p-2 text-neutral-500 hover:text-primary hover:bg-neutral-50 rounded-lg transition-all"
+            onClick={() => { setIsMenuOpen(true); setTimeout(() => searchInputRef.current?.focus(), 100); }}
           >
-             <Search className="w-5 h-5" />
+            <Search className="w-5 h-5" />
           </button>
-          <button 
-            className="lg:hidden p-2 text-neutral-700 hover:text-primary transition-all"
+          <button
+            className="p-2 text-neutral-700 hover:text-primary hover:bg-neutral-50 rounded-lg transition-all"
             onClick={() => {
-               setIsMenuOpen(!isMenuOpen);
-               if (!isMenuOpen) {
-                  setSearchQuery("");
-                  setOpenMobileDropdown(null);
-               }
+              setIsMenuOpen(!isMenuOpen);
+              if (!isMenuOpen) { setSearchQuery(""); setOpenMobileDropdown(null); }
             }}
           >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Navigation & Search */}
+      {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-neutral-200 absolute top-full left-0 w-full shadow-2xl animate-in slide-in-from-top duration-300 origin-top overflow-y-auto max-h-[85vh]">
-          <div className="p-4 border-b border-neutral-100 relative">
-             <Search className="absolute left-7 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
-             <input 
-               type="text"
-               placeholder="Search tools..."
-               value={searchQuery}
-               onChange={(e) => setSearchQuery(e.target.value)}
-               className="w-full bg-neutral-100 border-none rounded-xl py-3 pl-11 pr-4 text-sm focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-               autoFocus={false}
-             />
-             
-             {/* Mobile Search Results */}
-             {searchQuery.trim() !== "" && (
-               <div className="mt-2 bg-white border border-neutral-100 rounded-xl overflow-hidden shadow-sm">
-                 {searchResults.length > 0 ? (
-                   <div className="py-2">
-                     {searchResults.map(tool => (
-                       <Link 
-                         key={tool.name} 
-                         href={tool.href}
-                         onClick={handleLinkClick}
-                         className="flex items-center gap-3 px-4 py-3 hover:bg-neutral-50 transition-colors border-b border-neutral-50 last:border-0"
-                       >
-                         <div className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
-                           <tool.icon className="w-4 h-4" />
-                         </div>
-                         <div>
-                           <p className="text-sm font-bold text-neutral-900 leading-tight">{tool.name}</p>
-                           <p className="text-[10px] text-neutral-500 line-clamp-1 mt-0.5">{tool.description}</p>
-                         </div>
-                       </Link>
-                     ))}
-                   </div>
-                 ) : (
-                   <div className="p-6 text-center text-sm text-neutral-500">
-                     No tools found for "{searchQuery}"
-                   </div>
-                 )}
-               </div>
-             )}
+        <div className="lg:hidden bg-white/95 backdrop-blur-xl border-t border-neutral-100 absolute top-full left-0 w-full shadow-2xl overflow-y-auto max-h-[88vh]"
+             style={{ animation: "slide-down 0.2s ease-out" }}>
+
+          {/* Mobile Search */}
+          <div className="p-4 border-b border-neutral-100">
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
+              <input
+                type="text"
+                placeholder="Search tools…"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-neutral-100 rounded-xl py-3 pl-11 pr-4 text-sm outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                autoFocus={false}
+              />
+            </div>
+
+            {searchQuery.trim() !== "" && (
+              <div className="mt-3 bg-white border border-neutral-100 rounded-xl overflow-hidden shadow-sm">
+                {searchResults.length > 0 ? (
+                  <div className="py-1">
+                    {searchResults.map(tool => (
+                      <Link
+                        key={tool.name}
+                        href={tool.href}
+                        onClick={handleLinkClick}
+                        className="flex items-center gap-3 px-4 py-3 hover:bg-neutral-50 transition-colors border-b border-neutral-50 last:border-0"
+                      >
+                        <div className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                          <tool.icon className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-bold text-neutral-900">{tool.name}</p>
+                          <p className="text-[10px] text-neutral-400 line-clamp-1 mt-0.5">{tool.description}</p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="p-5 text-center text-sm text-neutral-400">No tools found for "{searchQuery}"</div>
+                )}
+              </div>
+            )}
           </div>
-          
-          {/* Hide Links if searching */}
+
+          {/* Mobile Nav Links */}
           {searchQuery.trim() === "" && (
-            <nav className="flex flex-col p-4 gap-1">
+            <nav className="flex flex-col p-3 gap-0.5">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
-                
+
                 if (link.hasDropdown && link.categoryName) {
                   const categoryTools = getToolsForCategory(link.categoryName);
                   if (categoryTools.length === 0) return null;
-
                   const isDropdownOpen = openMobileDropdown === link.name;
 
                   return (
                     <div key={link.name} className="flex flex-col">
-                      <div className="flex items-center justify-between">
-                        <button
-                          onClick={() => setOpenMobileDropdown(isDropdownOpen ? null : link.name)}
-                          className={`flex-grow flex items-center justify-between p-3.5 rounded-xl text-sm font-bold transition-all ${
-                            isActive || isDropdownOpen
-                              ? "bg-primary/5 text-primary" 
-                              : "text-neutral-700 hover:bg-neutral-50"
-                          }`}
-                        >
-                          {link.name}
-                          <ChevronDown className={`w-4 h-4 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`} />
-                        </button>
-                      </div>
+                      <button
+                        onClick={() => setOpenMobileDropdown(isDropdownOpen ? null : link.name)}
+                        className={`flex items-center justify-between p-3.5 rounded-xl text-sm font-bold transition-all ${
+                          isActive || isDropdownOpen
+                            ? "bg-primary/8 text-primary"
+                            : "text-neutral-700 hover:bg-neutral-50"
+                        }`}
+                      >
+                        {link.name}
+                        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""}`} />
+                      </button>
 
-                      {/* Mobile Category Tools Submenu */}
                       {isDropdownOpen && (
-                        <div className="ml-4 pl-4 border-l-2 border-primary/10 my-2 space-y-1">
+                        <div className="ml-4 pl-4 border-l-2 border-primary/15 my-1 space-y-0.5">
                           {categoryTools.map(tool => (
                             <Link
                               key={tool.name}
@@ -341,8 +365,8 @@ export default function Header() {
                     key={link.name}
                     href={link.href}
                     className={`flex items-center justify-between p-3.5 rounded-xl text-sm font-bold transition-all ${
-                      isActive 
-                        ? "bg-primary/5 text-primary" 
+                      isActive
+                        ? "bg-primary/8 text-primary"
                         : "text-neutral-700 hover:bg-neutral-50"
                     }`}
                     onClick={handleLinkClick}
