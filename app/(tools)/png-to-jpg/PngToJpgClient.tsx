@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { FileImage, Download, Loader2 } from "lucide-react";
-import ToolLayout from "@/app/components/ToolLayout";
+import ToolLayout from "@/app/components/ToolLayout"; 
+import { toolContents } from "@/app/lib/tool-content";
 import FileUploader from "@/app/components/FileUploader";
 
 export default function PngToJpg() {
@@ -59,6 +60,7 @@ export default function PngToJpg() {
 
     return (
         <ToolLayout
+            content={toolContents["png-to-jpg"]}
             title="PNG to JPG Converter"
             description="Convert your PNG images to high-quality JPG format instantly."
             icon={FileImage}

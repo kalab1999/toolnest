@@ -4,7 +4,7 @@ export default function Security() {
             <h1 className="text-3xl font-bold mb-6">Security</h1>
 
             <p className="mb-4">
-                At ToolNest, we take security seriously. We implement measures to protect your data and ensure safe usage.
+                At AllToolkit, we take security seriously. We implement measures to protect your data and ensure safe usage.
             </p>
 
             <h2 className="text-xl font-semibold mt-6 mb-2">Data Protection</h2>

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { CaseUpper, Copy, Trash2, CheckCircle2 } from "lucide-react";
-import ToolLayout from "@/app/components/ToolLayout";
+import ToolLayout from "@/app/components/ToolLayout"; 
+import { toolContents } from "@/app/lib/tool-content";
 
 export default function UppercaseConverter() {
     const [text, setText] = useState("");
@@ -29,6 +30,7 @@ export default function UppercaseConverter() {
 
     return (
         <ToolLayout
+            content={toolContents["uppercase-converter"]}
             title="Uppercase Converter"
             description="Convert your text to all uppercase letters instantly while preserving formatting."
             icon={CaseUpper}

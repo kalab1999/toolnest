@@ -114,11 +114,9 @@ export default function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
           <div className="w-9 h-9 rounded-xl flex items-center justify-center text-white font-black text-base shadow-lg shadow-primary/30 transition-all duration-300 group-hover:scale-110 group-hover:shadow-primary/50"
-               style={{ background: "linear-gradient(135deg, #1d4ed8, #3b82f6)" }}>
-            TN
-          </div>
+               style={{ background: "linear-gradient(135deg, #1d4ed8, #3b82f6)" }}>AT</div>
           <span className="text-xl font-black text-neutral-900 tracking-tight hidden sm:block">
-            Tool<span className="text-primary">Nest</span>
+            All<span className="text-primary">Toolkit</span>
           </span>
         </Link>
 

@@ -15,10 +15,10 @@ export default function AboutPage() {
             <Info className="w-7 h-7" />
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-6 tracking-tight animate-fade-in-up">
-            About <span className="text-primary italic">ToolNest</span>
+            About <span className="text-primary italic">AllToolkit</span>
           </h1>
           <p className="text-lg text-neutral-500 leading-relaxed mb-8 max-w-2xl mx-auto animate-fade-in-up [animation-delay:100ms]">
-            ToolNest is a next-generation platform dedicated to high-performance online utilities. 
+            AllToolkit is a next-generation platform dedicated to high-performance online utilities. 
             We build tools that are fast, accessible, and designed for the modern digital era.
           </p>
 
@@ -34,7 +34,7 @@ export default function AboutPage() {
             <h2 className="text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-3">Our Vision</h2>
             <h3 className="text-2xl font-bold text-neutral-900 mb-6 tracking-tight leading-tight">Empowering productivity through precision tools.</h3>
             <p className="text-neutral-500 text-sm leading-relaxed mb-8 max-w-md">
-              We started ToolNest with a simple idea: that powerful digital tools shouldn&apos;t be locked behind complex installs or intrusive signups. 
+              We started AllToolkit with a simple idea: that powerful digital tools shouldn&apos;t be locked behind complex installs or intrusive signups. 
               Our suite of utilities is built to process data efficiently.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -80,7 +80,7 @@ export default function AboutPage() {
           <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
           <div className="relative z-10">
             <h2 className="text-2xl font-bold mb-4 tracking-tight">Ready to simplify your workflow?</h2>
-            <p className="text-white/80 mb-8 max-w-xl mx-auto text-sm leading-relaxed">Join thousands of users who rely on ToolNest daily for professional-grade online utilities.</p>
+            <p className="text-white/80 mb-8 max-w-xl mx-auto text-sm leading-relaxed">Join thousands of users who rely on AllToolkit daily for professional-grade online utilities.</p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/all-tools" className="bg-white text-primary hover:bg-neutral-50 px-8 py-3.5 rounded-xl font-bold transition-all shadow-xl hover:-translate-y-1 text-sm">
                 Explore Directory

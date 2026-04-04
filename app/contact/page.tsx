@@ -21,8 +21,8 @@ import Link from "next/link";
 
 const faqs = [
   {
-    question: "Is ToolNest really free to use?",
-    answer: "Yes, 100%. ToolNest is committed to providing high-quality digital utilities completely free of charge. There are no hidden fees or premium subscriptions."
+    question: "Is AllToolkit really free to use?",
+    answer: "Yes, 100%. AllToolkit is committed to providing high-quality digital utilities completely free of charge. There are no hidden fees or premium subscriptions."
   },
   {
     question: "Do you store my uploaded images or data?",
@@ -49,7 +49,7 @@ const categories = [
   {
     icon: MessageSquare,
     title: "Feedback & Suggestions",
-    desc: "Have ideas on how to improve ToolNest? We're all ears.",
+    desc: "Have ideas on how to improve AllToolkit? We're all ears.",
     color: "text-purple-500",
     bg: "bg-purple-50"
   },
@@ -124,7 +124,7 @@ export default function SupportCenter() {
           <div className="space-y-8 animate-fade-in-up [animation-delay:400ms]">
             <div>
               <h2 className="text-3xl font-bold text-neutral-900 mb-4 tracking-tight">Frequently Asked Questions</h2>
-              <p className="text-neutral-500">Quick answers to common questions about ToolNest.</p>
+              <p className="text-neutral-500">Quick answers to common questions about AllToolkit.</p>
             </div>
             
             <div className="space-y-4">

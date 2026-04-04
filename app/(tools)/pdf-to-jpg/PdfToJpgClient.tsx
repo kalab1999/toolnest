@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { FileImage, Download, Loader2, CheckCircle2, UploadCloud } from "lucide-react";
-import ToolLayout from "@/app/components/ToolLayout";
+import ToolLayout from "@/app/components/ToolLayout"; 
+import { toolContents } from "@/app/lib/tool-content";
 import { useDropzone } from "react-dropzone";
 
 export default function PDFtoJPG() {
@@ -35,9 +36,9 @@ export default function PDFtoJPG() {
             // ✅ Correct import
             const pdfjs = await import("pdfjs-dist");
 
-            // ✅ Stable worker (VERY IMPORTANT)
+            // ✅ Stable worker matching version exactly
             pdfjs.GlobalWorkerOptions.workerSrc =
-                "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs";
+                `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
 
             const arrayBuffer = await file.arrayBuffer();
             const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise;
@@ -58,6 +59,9 @@ export default function PDFtoJPG() {
 
                 canvas.width = viewport.width;
                 canvas.height = viewport.height;
+
+                context.fillStyle = "#ffffff";
+                context.fillRect(0, 0, canvas.width, canvas.height);
 
                 await page.render({
                     canvasContext: context,
@@ -128,6 +132,7 @@ export default function PDFtoJPG() {
 
     return (
         <ToolLayout
+            content={toolContents["pdf-to-jpg"]}
             title="PDF to JPG"
             description="Convert every page of your PDF into high-quality JPG images."
             icon={FileImage}

@@ -2,7 +2,8 @@
 
 import { useState, useMemo } from "react";
 import { Type, Copy, Trash2, Check } from "lucide-react";
-import ToolLayout from "@/app/components/ToolLayout";
+import ToolLayout from "@/app/components/ToolLayout"; 
+import { toolContents } from "@/app/lib/tool-content";
 
 export default function WordCounter() {
     const [text, setText] = useState("");
@@ -34,6 +35,7 @@ export default function WordCounter() {
 
     return (
         <ToolLayout
+            content={toolContents["word-counter"]}
             title="Word Counter"
             description="Count words, characters, sentences, and estimate reading time for your text."
             icon={Type}

@@ -4,7 +4,7 @@ export default function PrivacyPolicy() {
             <h1 className="text-3xl font-bold mb-6">Privacy Policy</h1>
 
             <p className="mb-4">
-                At ToolNest, we respect your privacy. This page explains how we collect, use, and protect your information.
+                At AllToolkit, we respect your privacy. This page explains how we collect, use, and protect your information.
             </p>
 
             <h2 className="text-xl font-semibold mt-6 mb-2">Information We Collect</h2>

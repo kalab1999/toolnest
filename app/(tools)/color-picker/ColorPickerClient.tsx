@@ -2,7 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Pipette, Copy, Check, Upload, Image as ImageIcon, Palette } from "lucide-react";
-import ToolLayout from "@/app/components/ToolLayout";
+import ToolLayout from "@/app/components/ToolLayout"; 
+import { toolContents } from "@/app/lib/tool-content";
 
 export default function ColorPicker() {
     const [color, setColor] = useState("#2563eb");
@@ -104,6 +105,7 @@ export default function ColorPicker() {
 
     return (
         <ToolLayout
+            content={toolContents["color-picker"]}
             title="Color Picker"
             description="Pick, convert, and explore colors from a palette or uploaded images instantly."
             icon={Pipette}

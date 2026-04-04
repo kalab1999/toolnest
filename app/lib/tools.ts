@@ -21,7 +21,6 @@ export const toolsData = [
     slug: "pdf-tools",
     description: "Every tool you need to work with PDFs in one place.",
     items: [
-      { name: "Compress PDF", icon: Minimize2, href: "/compress-pdf", description: "Reduce PDF file size while maintaining quality." },
       { name: "JPG to PDF", icon: ImageIcon, href: "/jpg-to-pdf", description: "Convert JPG images to PDF in seconds." },
       { name: "PDF to JPG", icon: FileImage, href: "/pdf-to-jpg", description: "Extract images from your PDF or convert each page to a JPG." },
     ],

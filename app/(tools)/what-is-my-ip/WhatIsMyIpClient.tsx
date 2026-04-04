@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { Globe, Copy, RefreshCw, Check, ShieldCheck, MapPin, Server } from "lucide-react";
-import ToolLayout from "@/app/components/ToolLayout";
+import ToolLayout from "@/app/components/ToolLayout"; 
+import { toolContents } from "@/app/lib/tool-content";
 
 export default function WhatIsMyIp() {
     const [ipData, setIpData] = useState<{ ip: string; city?: string; country?: string; isp?: string } | null>(null);
@@ -52,6 +53,7 @@ export default function WhatIsMyIp() {
 
     return (
         <ToolLayout
+            content={toolContents["what-is-my-ip"]}
             title="What Is My IP"
             description="Find your public IP address and connection details instantly."
             icon={Globe}

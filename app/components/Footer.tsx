@@ -14,7 +14,7 @@ export default function Footer() {
   ];
 
   const resources = [
-    { name: "About ToolNest",  icon: Info,        href: "/about" },
+    { name: "About AllToolkit",  icon: Info,        href: "/about" },
     { name: "Privacy Policy",  icon: ShieldCheck, href: "/privacy-policy" },
     { name: "Support Center",  icon: MailQuestion,href: "/contact" },
   ];
@@ -46,11 +46,9 @@ export default function Footer() {
           <div className="lg:col-span-1 space-y-6">
             <Link href="/" className="flex items-center gap-2.5 group w-fit">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-black text-base shadow-lg shadow-primary/30 transition-all group-hover:scale-110"
-                   style={{ background: "linear-gradient(135deg, #1d4ed8, #3b82f6)" }}>
-                TN
-              </div>
+                   style={{ background: "linear-gradient(135deg, #1d4ed8, #3b82f6)" }}>AT</div>
               <span className="text-2xl font-black text-white tracking-tight">
-                Tool<span className="text-primary">Nest</span>
+                All<span className="text-primary">Toolkit</span>
               </span>
             </Link>
             <p className="text-neutral-400 text-sm leading-relaxed max-w-xs">
@@ -124,7 +122,7 @@ export default function Footer() {
             <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-4">
               <div className="flex items-center gap-2">
                 <Zap className="w-4 h-4 text-primary" />
-                <span className="text-white font-black text-sm uppercase tracking-widest">ToolNest Stats</span>
+                <span className="text-white font-black text-sm uppercase tracking-widest">AllToolkit Stats</span>
               </div>
               {[
                 { value: "937K+", label: "Happy Users" },
@@ -147,7 +145,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex flex-col sm:flex-row items-center gap-2 text-center sm:text-left">
             <p className="text-neutral-500 text-sm">
-              © {currentYear} <span className="text-white font-bold">ToolNest</span>. All rights reserved.
+              © {currentYear} <span className="text-white font-bold">AllToolkit</span>. All rights reserved.
             </p>
             <span className="hidden sm:block text-neutral-700">·</span>
             <Link

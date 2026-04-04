@@ -4,7 +4,7 @@ export default function Cookies() {
             <h1 className="text-3xl font-bold mb-6">Cookies Policy</h1>
 
             <p className="mb-4">
-                ToolNest uses cookies to enhance your experience and provide relevant ads through Google AdSense.
+                AllToolkit uses cookies to enhance your experience and provide relevant ads through Google AdSense.
             </p>
 
             <h2 className="text-xl font-semibold mt-6 mb-2">What Are Cookies?</h2>

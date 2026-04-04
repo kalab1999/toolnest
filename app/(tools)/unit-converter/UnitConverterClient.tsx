@@ -2,7 +2,8 @@
 
 import { useState, useMemo } from "react";
 import { Ruler, ArrowLeftRight, ChevronDown, Weight, Droplets, Maximize, Zap, Clock, HardDrive, Info } from "lucide-react";
-import ToolLayout from "@/app/components/ToolLayout";
+import ToolLayout from "@/app/components/ToolLayout"; 
+import { toolContents } from "@/app/lib/tool-content";
 
 // Metadata is handled in a separate layout or sibling server component if needed, 
 // for now, we'll remove it from the client-side file to avoid issues.
@@ -151,6 +152,7 @@ export default function UnitConverter() {
 
     return (
         <ToolLayout
+            content={toolContents["unit-converter"]}
             title="Unit Converter"
             description="Professional-grade conversion for length, weight, volume, data, and more."
             icon={Ruler}

@@ -15,7 +15,8 @@ import {
     Info,
     Scale
 } from "lucide-react";
-import ToolLayout from "@/app/components/ToolLayout";
+import ToolLayout from "@/app/components/ToolLayout"; 
+import { toolContents } from "@/app/lib/tool-content";
 
 type UnitType = "metric" | "imperial";
 
@@ -68,6 +69,7 @@ export default function BmiCalculator() {
 
     return (
         <ToolLayout
+            content={toolContents["bmi-calculator"]}
             title="BMI Calculator"
             description="Calculate your Body Mass Index (BMI) to understand your weight category based on height."
             icon={Ruler}

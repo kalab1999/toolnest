@@ -4,12 +4,12 @@ export default function Terms() {
             <h1 className="text-3xl font-bold mb-6">Terms of Service</h1>
 
             <p className="mb-4">
-                By using ToolNest, you agree to follow these terms and conditions. Please read them carefully.
+                By using AllToolkit, you agree to follow these terms and conditions. Please read them carefully.
             </p>
 
             <h2 className="text-xl font-semibold mt-6 mb-2">Usage</h2>
             <p className="mb-4">
-                ToolNest provides free online tools for personal and professional use. You may not misuse the services.
+                AllToolkit provides free online tools for personal and professional use. You may not misuse the services.
             </p>
 
             <h2 className="text-xl font-semibold mt-6 mb-2">Limitations</h2>
@@ -19,7 +19,7 @@ export default function Terms() {
 
             <h2 className="text-xl font-semibold mt-6 mb-2">Changes</h2>
             <p className="mb-4">
-                Terms may change over time. Continued use of ToolNest means you accept updated terms.
+                Terms may change over time. Continued use of AllToolkit means you accept updated terms.
             </p>
         </div>
     );

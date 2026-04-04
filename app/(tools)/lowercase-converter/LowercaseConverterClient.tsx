@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { CaseLower, Copy, Trash2, CheckCircle2 } from "lucide-react";
-import ToolLayout from "@/app/components/ToolLayout";
+import ToolLayout from "@/app/components/ToolLayout"; 
+import { toolContents } from "@/app/lib/tool-content";
 
 export default function LowercaseConverter() {
     const [text, setText] = useState("");
@@ -29,6 +30,7 @@ export default function LowercaseConverter() {
 
     return (
         <ToolLayout
+            content={toolContents["lowercase-converter"]}
             title="Lowercase Converter"
             description="Convert your text to all lowercase letters instantly while preserving formatting."
             icon={CaseLower}

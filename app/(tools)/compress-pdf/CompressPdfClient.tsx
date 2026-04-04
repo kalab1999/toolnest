@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Minimize2, Download, Loader2, CheckCircle2 } from "lucide-react";
 import ToolLayout from "@/app/components/ToolLayout";
 import { useDropzone } from "react-dropzone";
+import { toolContents } from "@/app/lib/tool-content";
 
 export default function CompressPDF() {
     const [file, setFile] = useState<File | null>(null);
@@ -29,27 +30,57 @@ export default function CompressPDF() {
         setError(null);
 
         try {
-            // Light compression only — pdf-lib cannot compress embedded images.
-            // This strips unused objects and resaves the PDF structure.
+            // True client-side compression: Rasterize pages via pdf.js and rebuild using pdf-lib
+            const pdfjs = await import("pdfjs-dist");
+            // Important: Worker version MUST match exactly to prevent 'corrupted' loading errors
+            pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
+
             const { PDFDocument } = await import("pdf-lib");
+            const newPdf = await PDFDocument.create();
+
             const arrayBuffer = await file.arrayBuffer();
-            const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+            const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise;
+            const totalPages = pdf.numPages;
 
-            // Remove document metadata to shave a few bytes
-            pdfDoc.setTitle("");
-            pdfDoc.setAuthor("");
-            pdfDoc.setSubject("");
-            pdfDoc.setKeywords([]);
-            pdfDoc.setProducer("");
-            pdfDoc.setCreator("");
+            for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+                const page = await pdf.getPage(pageNum);
+                // Lower scale factor to reduce output file size
+                const viewport = page.getViewport({ scale: 1.2 }); 
 
-            // Save with object stream compression disabled for maximum compat
-            const compressedBytes = await pdfDoc.save({
-                useObjectStreams: false,
-                objectsPerTick: 20,
-            });
+                const canvas = document.createElement("canvas");
+                const context = canvas.getContext("2d");
+                if (!context) throw new Error("Canvas error");
 
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+
+                // PDFs have a transparent background. JPEG does not support transparency.
+                // We MUST fill the canvas with white before rendering, otherwise the PDF turns black.
+                context.fillStyle = "#ffffff";
+                context.fillRect(0, 0, canvas.width, canvas.height);
+
+                await page.render({
+                    canvasContext: context,
+                    viewport,
+                    canvas,
+                }).promise;
+
+                // Compress page as JPEG (quality 0.5 for solid compression)
+                const dataUrl = canvas.toDataURL("image/jpeg", 0.5);
+
+                const jpgImage = await newPdf.embedJpg(dataUrl);
+                const newPage = newPdf.addPage([viewport.width, viewport.height]);
+                newPage.drawImage(jpgImage, {
+                    x: 0,
+                    y: 0,
+                    width: viewport.width,
+                    height: viewport.height,
+                });
+            }
+
+            const compressedBytes = await newPdf.save({ useObjectStreams: false });
             const blob = new Blob([compressedBytes as any], { type: "application/pdf" });
+            
             setResult({ blob, name: `compressed_${file.name}` });
         } catch (err) {
             console.error(err);
@@ -92,6 +123,7 @@ export default function CompressPDF() {
                 "Download your smaller PDF.",
                 "Note: Light compression — best results on text-heavy PDFs.",
             ]}
+            content={toolContents["compress-pdf"]}
         >
             <div className="w-full max-w-3xl mx-auto space-y-6">
                 {!result && (

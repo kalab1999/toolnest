@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useMemo, useRef } from "react";
 import { Coins, ArrowLeftRight, ChevronDown, RefreshCcw, Search, X, TrendingUp, Info, ArrowRight } from "lucide-react";
-import ToolLayout from "@/app/components/ToolLayout";
+import ToolLayout from "@/app/components/ToolLayout"; 
+import { toolContents } from "@/app/lib/tool-content";
 
 // Comprehensive currency list (ISO 4217)
 const currencies: Record<string, string> = {
@@ -169,6 +170,7 @@ export default function CurrencyConverter() {
 
     return (
         <ToolLayout
+            content={toolContents["currency-converter"]}
             title="Currency Converter"
             description="Professional world currency exchange tool with real-time market data."
             icon={Coins}

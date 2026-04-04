@@ -2,7 +2,8 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { Lock, Copy, Check, RefreshCw, ShieldCheck, ShieldAlert } from "lucide-react";
-import ToolLayout from "@/app/components/ToolLayout";
+import ToolLayout from "@/app/components/ToolLayout"; 
+import { toolContents } from "@/app/lib/tool-content";
 
 export default function PasswordGenerator() {
     const [password, setPassword] = useState("");
@@ -73,6 +74,7 @@ export default function PasswordGenerator() {
 
     return (
         <ToolLayout
+            content={toolContents["password-generator"]}
             title="Password Generator"
             description="Create secure, random passwords to keep your online accounts safe."
             icon={Lock}

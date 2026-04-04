@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { CaseSensitive, Copy, Trash2, CheckCircle2 } from "lucide-react";
-import ToolLayout from "@/app/components/ToolLayout";
+import ToolLayout from "@/app/components/ToolLayout"; 
+import { toolContents } from "@/app/lib/tool-content";
 
 export default function CapitalizeText() {
     const [text, setText] = useState("");
@@ -36,6 +37,7 @@ export default function CapitalizeText() {
 
     return (
         <ToolLayout
+            content={toolContents["capitalize-text"]}
             title="Capitalize Text"
             description="Capitalize the first letter of every word in your text automatically."
             icon={CaseSensitive}

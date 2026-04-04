@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Minimize2, Download, Loader2 } from "lucide-react";
 import ToolLayout from "@/app/components/ToolLayout";
 import FileUploader from "@/app/components/FileUploader";
+import { toolContents } from "@/app/lib/tool-content";
 
 const QUALITY = 0.5;
 
@@ -78,6 +79,7 @@ export default function ImageCompressor() {
                 "Click 'Compress Image' to process at 50% quality.",
                 "Compare sizes and download your optimized image."
             ]}
+            content={toolContents["image-compressor"]}
         >
             <div className="flex flex-col items-center gap-6">
                 <FileUploader

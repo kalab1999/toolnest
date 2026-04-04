@@ -2,7 +2,8 @@
 
 import { useState, useCallback } from "react";
 import { Image as ImageIcon, Download, Loader2, CheckCircle2, File, UploadCloud } from "lucide-react";
-import ToolLayout from "@/app/components/ToolLayout";
+import ToolLayout from "@/app/components/ToolLayout"; 
+import { toolContents } from "@/app/lib/tool-content";
 import { useDropzone } from "react-dropzone";
 
 export default function JPGtoPDF() {
@@ -85,6 +86,7 @@ export default function JPGtoPDF() {
 
     return (
         <ToolLayout
+            content={toolContents["jpg-to-pdf"]}
             title="JPG to PDF"
             description="Convert JPG or PNG images to a PDF document instantly."
             icon={ImageIcon}

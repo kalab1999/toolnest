@@ -3,10 +3,11 @@
 import { useState, useRef } from "react";
 import { QrCode, Download, Copy, Check, Share2 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
-import ToolLayout from "@/app/components/ToolLayout";
+import ToolLayout from "@/app/components/ToolLayout"; 
+import { toolContents } from "@/app/lib/tool-content";
 
 export default function QrCodeGenerator() {
-    const [text, setText] = useState("https://toolnest.com");
+    const [text, setText] = useState("https://alltoolkit.com");
     const size = 256;
     const [fgColor, setFgColor] = useState("#000000");
     const [bgColor, setBgColor] = useState("#ffffff");
@@ -28,7 +29,7 @@ export default function QrCodeGenerator() {
             ctx?.drawImage(img, 0, 0);
             const pngFile = canvas.toDataURL("image/png");
             const downloadLink = document.createElement("a");
-            downloadLink.download = "qrcode-toolnest.png";
+            downloadLink.download = "qrcode-alltoolkit.png";
             downloadLink.href = pngFile;
             downloadLink.click();
         };
@@ -44,6 +45,7 @@ export default function QrCodeGenerator() {
 
     return (
         <ToolLayout
+            content={toolContents["qr-code-generator"]}
             title="QR Code Generator"
             description="Create custom QR codes for your websites, social media, or any text instantly."
             icon={QrCode}

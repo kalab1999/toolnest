@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { AlignLeft, Copy, Trash2, CheckCircle2 } from "lucide-react";
-import ToolLayout from "@/app/components/ToolLayout";
+import ToolLayout from "@/app/components/ToolLayout"; 
+import { toolContents } from "@/app/lib/tool-content";
 
 export default function RemoveExtraSpaces() {
     const [text, setText] = useState("");
@@ -36,6 +37,7 @@ export default function RemoveExtraSpaces() {
 
     return (
         <ToolLayout
+            content={toolContents["remove-extra-spaces"]}
             title="Remove Extra Spaces"
             description="Clean up your text by removing redundant white spaces while keeping line breaks."
             icon={AlignLeft}

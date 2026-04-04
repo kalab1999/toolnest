@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { ArrowRight, Search, Zap, Shield, Star, TrendingUp, Users } from "lucide-react";
 import { toolsData } from "@/app/lib/tools";
+import { blogPosts } from "@/app/lib/blog-data";
 
 // Map each category slug to a CSS class for the icon background
 const categoryIconClass: Record<string, string> = {
@@ -17,7 +18,6 @@ const categoryIconClass: Record<string, string> = {
 
 // Hand-picked popular tools (name + href)
 const popularTools = [
-  { name: "Compress PDF",       slug: "pdf-tools",       href: "/compress-pdf",       iconClass: "icon-pdf" },
   { name: "JPG to PNG",         slug: "image-tools",     href: "/jpg-to-png",         iconClass: "icon-image" },
   { name: "QR Code Generator",  slug: "utilities",       href: "/qr-code-generator",  iconClass: "icon-utilities" },
   { name: "Password Generator", slug: "utilities",       href: "/password-generator", iconClass: "icon-utilities" },
@@ -176,18 +176,13 @@ export default function Home() {
             No sign-up. No watermarks. Just results.
           </p>
 
-          {/* Hero Search */}
-          <div className="animate-fade-in-up mb-8" style={{ animationDelay: "180ms" }}>
-            <HeroSearch />
-          </div>
-
           {/* CTA Buttons */}
           <div className="flex flex-wrap justify-center gap-3 mb-14 animate-fade-in-up" style={{ animationDelay: "240ms" }}>
             <Link href="/all-tools" className="premium-button text-base !py-3.5 !px-8">
               Explore All Tools
             </Link>
             <Link href="/about" className="bg-white border border-neutral-200 text-neutral-800 px-8 py-3.5 rounded-xl font-bold text-base hover:bg-neutral-50 hover:border-neutral-300 hover:shadow-md transition-all">
-              About ToolNest
+              About AllToolkit
             </Link>
           </div>
 
@@ -336,11 +331,12 @@ export default function Home() {
               </div>
 
               {/* Horizontal ad break */}
-              <div className="ad-placeholder w-full h-24 mt-10 rounded-2xl" />
+              <div className="ad-placeholder w-full h-24 mt-10 rounded-2xl flex items-center justify-center opacity-50">AdSlot List Header</div>
             </div>
           );
         })}
       </div>
+
     </div>
   );
 }
