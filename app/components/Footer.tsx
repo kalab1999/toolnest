@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mail, Github, Twitter, Info, ShieldCheck, MailQuestion, ArrowRight, Zap } from "lucide-react";
+import { Mail, Info, ShieldCheck, MailQuestion, ArrowRight, Zap } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -57,8 +57,6 @@ export default function Footer() {
             {/* Social Links */}
             <div className="flex items-center gap-3">
               {[
-                { icon: Github,  href: "https://github.com",  label: "GitHub" },
-                { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
                 { icon: Mail,    href: "/contact",            label: "Contact" },
               ].map(({ icon: Icon, href, label }) => (
                 <a
