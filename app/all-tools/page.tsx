@@ -45,10 +45,7 @@ export default function AllTools() {
               ))}
             </div>
 
-            {/* In-Directory Ad Break */}
-            <div className="ad-placeholder h-20 mt-12 bg-white border border-neutral-100 rounded-2xl flex items-center justify-center text-[10px] font-bold text-neutral-400 uppercase tracking-widest opacity-40">
-              Community Sponsorship & Support
-            </div>
+
           </div>
         ))}
       </div>

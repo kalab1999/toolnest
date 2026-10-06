@@ -27,13 +27,6 @@ export default function BlogIndex() {
           </p>
         </div>
 
-        {/* AdSense Top */}
-        <div className="w-full max-w-4xl mx-auto h-[90px] bg-white/40 border border-neutral-200 rounded-2xl flex items-center justify-center overflow-hidden mb-16">
-            <div className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest text-center">
-              Advertisement
-              <div className="w-[728px] max-w-full h-[90px] bg-neutral-100 mt-1 flex items-center justify-center rounded-lg">Top Board Ad 728x90</div>
-            </div>
-        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post) => (

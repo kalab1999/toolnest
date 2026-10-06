@@ -127,9 +127,7 @@ export default function ImageCompressor() {
                             </div>
                         </div>
 
-                        <div className="ad-placeholder h-16 w-full opacity-30 border-dashed border border-neutral-200 rounded-2xl flex items-center justify-center text-[8px] font-black text-neutral-400 uppercase tracking-widest">
-                            Conversion sponsorship
-                        </div>
+
 
                         <div className="flex flex-wrap items-center justify-center gap-4 w-full">
                             <button

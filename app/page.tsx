@@ -202,10 +202,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Ad Banner ────────────────────────────────────────────────────── */}
-      <div className="container mx-auto px-4 max-w-4xl mb-16">
-        <div className="ad-placeholder h-20 rounded-2xl opacity-50" />
-      </div>
+
 
       {/* ── Popular Tools ─────────────────────────────────────────────────── */}
       <section className="px-4 mb-24">
@@ -321,17 +318,9 @@ export default function Home() {
                         </div>
                       </div>
                     </Link>
-
-                    {/* Ad slot every 5th tool */}
-                    {(idx2 + 1) === 5 && (
-                      <div className="glass-card flex flex-col h-full overflow-hidden ad-placeholder border-dashed min-h-[260px] border-0" />
-                    )}
                   </React.Fragment>
                 ))}
               </div>
-
-              {/* Horizontal ad break */}
-              <div className="ad-placeholder w-full h-24 mt-10 rounded-2xl flex items-center justify-center opacity-50">AdSlot List Header</div>
             </div>
           );
         })}

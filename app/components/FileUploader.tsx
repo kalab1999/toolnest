@@ -78,10 +78,6 @@ export default function FileUploader({ onFileSelect, accept, label }: FileUpload
             <h3 className="text-sm font-bold text-neutral-900 mb-0.5">{label}</h3>
             <p className="text-[10px] text-neutral-400 uppercase tracking-widest font-black">Click or Drag Image</p>
           </div>
-          
-          <div className="ad-placeholder h-16 min-h-[64px] opacity-40 border-dashed border border-neutral-200 rounded-2xl flex items-center justify-center text-[9px] font-black text-neutral-400 uppercase tracking-widest">
-            Sponsorship slot
-          </div>
         </div>
       ) : (
         <div className="flex flex-col gap-3">
@@ -99,10 +95,6 @@ export default function FileUploader({ onFileSelect, accept, label }: FileUpload
             >
               <X className="w-4 h-4" />
             </button>
-          </div>
-          
-          <div className="ad-placeholder h-16 min-h-[64px] opacity-20 border-dashed border border-neutral-200 rounded-2xl flex items-center justify-center text-[9px] font-black text-neutral-400 uppercase tracking-widest">
-            Ad Space
           </div>
         </div>
       )}

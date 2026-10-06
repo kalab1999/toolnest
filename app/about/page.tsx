@@ -22,9 +22,7 @@ export default function AboutPage() {
             We build tools that are fast, accessible, and designed for the modern digital era.
           </p>
 
-          <div className="ad-placeholder h-16 max-w-xl mx-auto opacity-40 border-dashed border border-neutral-200 rounded-2xl flex items-center justify-center text-[9px] font-black text-neutral-400 uppercase tracking-widest animate-fade-in-up [animation-delay:150ms]">
-            Sponsorship Placement
-          </div>
+
         </div>
       </section>
 

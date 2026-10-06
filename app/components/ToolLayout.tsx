@@ -86,26 +86,9 @@ export default function ToolLayout({
               </div>
             </div>
 
-            {/* Contextual Ad Top */}
-            <div className="w-full h-[90px] bg-white/40 border border-neutral-200 rounded-2xl flex items-center justify-center overflow-hidden">
-                {/* AdSense Placement: Above Tool */}
-                <div className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest text-center">
-                  Advertisement
-                  <div className="w-[728px] max-w-full h-[90px] bg-neutral-100 mt-1 flex items-center justify-center rounded-lg">Ad Slot 728x90</div>
-                </div>
-            </div>
-
             {/* Tool Surface (The core functional app) */}
             <div className="bg-white p-6 md:p-8 rounded-xl border border-neutral-200 shadow-xl min-h-[300px]">
               {children}
-            </div>
-
-            {/* AdSense Placement: Below Tool */}
-            <div className="w-full min-h-[100px] bg-white/40 border border-neutral-200 rounded-2xl flex items-center justify-center overflow-hidden py-4">
-                <div className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest text-center w-full">
-                  Advertisement
-                  <div className="w-[90%] max-w-[970px] h-[90px] lg:h-[250px] mx-auto bg-neutral-100 mt-2 flex items-center justify-center rounded-lg">Ad Slot 970x250</div>
-                </div>
             </div>
 
             {/* Legacy Instructions (fallback) */}
@@ -166,14 +149,6 @@ export default function ToolLayout({
                   )}
                 </section>
 
-                {/* AdSense Placement: Mid-content */}
-                <div className="my-8 w-full h-[250px] bg-neutral-50 border border-neutral-200 rounded-2xl flex items-center justify-center overflow-hidden">
-                    <div className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest text-center">
-                      Advertisement
-                      <div className="w-[300px] h-[250px] bg-neutral-100 mt-1 flex items-center justify-center rounded-lg">Ad Slot 300x250</div>
-                    </div>
-                </div>
-
                 {/* Benefits */}
                 <section>
                   <div className="flex items-center gap-3 mb-6">
@@ -223,27 +198,11 @@ export default function ToolLayout({
               </article>
             )}
 
-            {/* AdSense Placement: Bottom */}
-            <div className="w-full h-[90px] bg-white/40 border border-neutral-200 rounded-2xl flex items-center justify-center overflow-hidden">
-                <div className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest text-center">
-                  Advertisement
-                  <div className="w-[728px] max-w-full h-[90px] bg-neutral-100 mt-1 flex items-center justify-center rounded-lg">Ad Slot 728x90 Bottom</div>
-                </div>
-            </div>
-
           </div>
 
           {/* Sidebar */}
           <aside className="lg:w-80 flex-shrink-0 space-y-6 animate-fade-in-up [animation-delay:200ms]">
             <div className="sticky top-24 space-y-6">
-              
-              {/* Sidebar Ad 1 */}
-              <div className="w-full h-[300px] bg-white border border-neutral-200 rounded-2xl flex items-center justify-center overflow-hidden shadow-sm">
-                <div className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest text-center">
-                  Advertisement
-                  <div className="w-[300px] h-[250px] bg-neutral-50 mt-1 flex items-center justify-center rounded-lg">Sidebar Ad 300x250</div>
-                </div>
-              </div>
               
               <div className="bg-white p-6 rounded-xl border border-neutral-200 shadow-sm group">
                 <h3 className="text-sm font-black text-neutral-900 mb-4 flex items-center justify-between uppercase tracking-widest">
@@ -272,14 +231,6 @@ export default function ToolLayout({
                         <p className="text-[10px] text-neutral-500 line-clamp-1">Create custom QR codes instantly.</p>
                       </div>
                     </a>
-                </div>
-              </div>
-
-               {/* Sidebar Ad 2 */}
-               <div className="w-full h-[600px] bg-white border border-neutral-200 rounded-2xl flex items-center justify-center overflow-hidden shadow-sm hidden lg:flex">
-                <div className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest text-center">
-                  Advertisement
-                  <div className="w-[300px] h-[600px] bg-neutral-50 mt-1 flex items-center justify-center rounded-lg">Sidebar Ad 300x600</div>
                 </div>
               </div>
 

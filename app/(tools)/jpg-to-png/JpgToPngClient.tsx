@@ -115,7 +115,7 @@ export default function JpgToPng() {
                         </div>
 
                         <div className="flex flex-wrap items-center justify-center gap-6">
-                            <div className="ad-placeholder h-12 w-48 opacity-30 text-[8px]">Partner Promo</div>
+                            
                             <button
                                 onClick={() => { setResult(null); setFile(null); }}
                                 className="text-neutral-400 dark:text-neutral-500 text-[11px] font-black uppercase tracking-[0.2em] hover:text-primary transition-colors"

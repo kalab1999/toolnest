@@ -68,14 +68,6 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           </div>
         </div>
 
-        {/* AdSense Top Article */}
-        <div className="w-full h-[90px] bg-white/40 border border-neutral-200 rounded-2xl flex items-center justify-center overflow-hidden mb-12">
-            <div className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest text-center">
-              Advertisement
-              <div className="w-[728px] max-w-full h-[90px] bg-neutral-100 mt-1 flex items-center justify-center rounded-lg">Article Top Ad 728x90</div>
-            </div>
-        </div>
-
         <div className="flex flex-col lg:flex-row gap-12">
             
             {/* Main Content */}
@@ -114,14 +106,6 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             <aside className="lg:w-1/3">
               <div className="sticky top-28 space-y-8">
                 
-                {/* Sidebar Ad 300x250 */}
-                <div className="w-full h-[250px] bg-white border border-neutral-200 rounded-2xl flex items-center justify-center overflow-hidden shadow-sm">
-                    <div className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest text-center">
-                      Advertisement
-                      <div className="w-[300px] h-[250px] bg-neutral-50 mt-1 flex items-center justify-center rounded-lg">Sidebar Ad 300x250</div>
-                    </div>
-                </div>
-
                 <div className="bg-white p-6 rounded-2xl border border-neutral-200 shadow-sm">
                   <h3 className="text-sm font-black text-neutral-900 uppercase tracking-widest mb-6">Related Reads</h3>
                   <div className="space-y-6">
@@ -147,14 +131,6 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                 </div>
               </div>
             </aside>
-        </div>
-
-        {/* AdSense Bottom Article */}
-        <div className="w-full max-w-3xl mx-auto h-[90px] bg-white/40 border border-neutral-200 rounded-2xl flex items-center justify-center overflow-hidden mt-20">
-            <div className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest text-center w-full">
-              Advertisement
-              <div className="w-full max-w-[728px] h-[90px] bg-neutral-100 mt-1 flex text-center items-center justify-center rounded-lg mx-auto">Article Bottom Ad 728x90</div>
-            </div>
         </div>
 
       </div>

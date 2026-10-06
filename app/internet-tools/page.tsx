@@ -42,10 +42,7 @@ export default function InternetToolsPage() {
           ))}
         </div>
 
-        {/* Category Ad Space */}
-        <div className="mt-20 ad-placeholder h-24 bg-white/50 border border-neutral-100/60 rounded-2xl flex items-center justify-center text-[10px] font-bold text-neutral-400 uppercase tracking-widest opacity-40">
-          Support These Professional Utilities
-        </div>
+
       </div>
     </div>
   );

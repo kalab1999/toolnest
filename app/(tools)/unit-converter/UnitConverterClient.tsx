@@ -286,9 +286,7 @@ export default function UnitConverter() {
                             </ul>
                         </div>
 
-                        <div className="ad-placeholder h-24 !m-0 rounded-2xl opacity-60">
-                            Banner Support Space
-                        </div>
+                        
                     </div>
                 </div>
             </div>

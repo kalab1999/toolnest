@@ -315,9 +315,7 @@ export default function CurrencyConverter() {
                             </div>
                         </div>
 
-                        <div className="ad-placeholder h-40 !m-0 rounded-[2.5rem] opacity-40 border-dashed border-2 border-neutral-100 flex items-center justify-center text-[10px] font-bold text-neutral-400 uppercase tracking-widest">
-                            Commercial Placement
-                        </div>
+                        
                     </div>
                 </div>
             </div>
