@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   description: "AllToolkit provides fast, simple, and powerful tools to help you work with images, text, and conversions instantly.",
   verification: {
     google: "Rbw65C7ATHWNtgSuChVcDEGQx4h1LZtEb95sgtTRZr8"
+  },
+  other: {
+    "google-adsense-account": "ca-pub-2422025830935555"
   }
 };
 
@@ -25,8 +28,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* ✅ ADD THIS LINE */}
         <meta name="google-adsense-account" content="ca-pub-2422025830935555" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2422025830935555"
+          crossOrigin="anonymous"
+        ></script>
       </head>
 
       <body className={`${outfit.variable} font-sans antialiased min-h-screen flex flex-col`}>
